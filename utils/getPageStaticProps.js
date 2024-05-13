@@ -2,6 +2,7 @@ import { gql } from "@apollo/client";
 import client from "client";
 import { cleanAndtransformBlocks } from "./cleanAndtransformBlocks";
 import { mapMainMenuItems } from "./mapMainMenuItems";
+import { PropertyFeatures } from "components/PropertyFeatures";
 
 export const getPageStaticProps = async (context) => {
 console.log("CONTEXT:", context);
@@ -69,6 +70,9 @@ const blocks = cleanAndtransformBlocks(data.nodeByUri.blocks);
 return {    
     props: {
         seo: data.nodeByUri.seo,
+        title: data.nodeByUri.title,
+        propertyFeatures: data.nodeByUri.propertyFeatures || null,
+        featuredImage: data.nodeByUri.featuredImage?.node?.sourceUrl || null,
     mainMenuItems: mapMainMenuItems(
         data.acfOptionsMainMenu.mainMenu.menuItems
     ),
